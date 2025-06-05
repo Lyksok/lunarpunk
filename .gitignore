@@ -19,3 +19,6 @@ Cargo.lock
 assets/**/*.meta
 crates/bevy_asset/imported_assets
 imported_assets
+
+# RustOver config
+.idea/
