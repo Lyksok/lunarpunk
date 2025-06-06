@@ -46,11 +46,12 @@ fn text(text: &str) -> impl Bundle + use<> {
 
 pub fn setup(mut commands: Commands) {
     commands
-        .spawn(Node {
+        .spawn((Node {
             width: Val::Percent(100.0),
             height: Val::Percent(100.0),
             ..default()
-        })
+        },
+        BackgroundColor(Color::srgb_u8(86,81,133)),))
         .with_children(|builder| {
             // ############# Main title #############
             builder.spawn(text("Lunarpunk"));
