@@ -2,7 +2,7 @@ use bevy::prelude::*;
 use bevy::window::WindowResolution;
 use bevy::winit::WinitSettings;
 use lunarpunk::{
-    camera::menu_camera::spawn_camera, menu::button_interactions::quit_button,
+    camera::menu_camera::spawn_camera, menu::button_interactions::main_menu_button_interaction,
     menu::menu_scene::setup,
 };
 
@@ -18,6 +18,6 @@ fn main() {
         }))
         .insert_resource(WinitSettings::desktop_app())
         .add_systems(Startup, (setup, spawn_camera))
-        .add_systems(Update, quit_button)
+        .add_systems(Update, main_menu_button_interaction)
         .run();
 }

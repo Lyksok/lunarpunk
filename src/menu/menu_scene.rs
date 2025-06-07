@@ -41,6 +41,14 @@ fn text(text: &str) -> impl Bundle + use<> {
     )
 }
 
+#[derive(Component, Debug)]
+pub enum MenuButtonAction {
+    Play,
+    Settings,
+    Credits,
+    Quit,
+}
+
 pub fn setup(mut commands: Commands) {
     commands
         .spawn((
@@ -80,10 +88,10 @@ pub fn setup(mut commands: Commands) {
                     ..default()
                 },
                 children![
-                    button("Play"),
-                    button("Settings"),
-                    button("Credits"),
-                    button("Quit"),
+                    (button("Play"),MenuButtonAction::Play),
+                    (button("Settings"), MenuButtonAction::Settings),
+                    (button("Credits"), MenuButtonAction::Credits),
+                    (button("Quit"), MenuButtonAction::Quit),
                 ],
             ));
         });
