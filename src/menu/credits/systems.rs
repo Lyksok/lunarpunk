@@ -102,18 +102,18 @@ pub fn button_interaction(
                 match menu_button_action {
                     MenuButtonAction::Back => {
                         // Handle back button action
+                        #[cfg(debug_assertions)]
                         println!("Back button pressed");
+                        
                         menu_state.set(MenuState::Main);
                     }
                 }
             }
             Interaction::Hovered => {
                 // Handle button hover
-                // println!("Button hovered: {:?}", menu_button_action);
             }
             Interaction::None => {
                 // Handle button release or no interaction
-                // println!("Button released: {:?}", menu_button_action);
             }
             _ => {}
         }

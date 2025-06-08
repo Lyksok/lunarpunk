@@ -109,21 +109,28 @@ pub fn button_interaction(
                 match menu_button_action {
                     MenuButtonAction::Play if input.just_pressed(MouseButton::Left) => {
                         // Handle play button action
-                        //println!("Play button pressed");
+                        #[cfg(debug_assertions)]
+                        println!("Play button pressed");
                     }
                     MenuButtonAction::Settings if input.just_pressed(MouseButton::Left) => {
                         // Handle settings button action
-                        //println!("Settings button pressed");
+                        #[cfg(debug_assertions)]
+                        println!("Settings button pressed");
+                        
                         menu_state.set(MenuState::Settings);
                     }
                     MenuButtonAction::Credits if input.just_pressed(MouseButton::Left) => {
                         // Handle credits button action
-                        //println!("Credits button pressed");
+                        #[cfg(debug_assertions)]
+                        println!("Credits button pressed");
+                        
                         menu_state.set(MenuState::Credits);
                     }
                     MenuButtonAction::Quit if input.just_pressed(MouseButton::Left) => {
                         // Handle quit button action
-                        //println!("Quit button pressed");
+                        #[cfg(debug_assertions)]
+                        println!("Quit button pressed");
+                        
                         app_exit_events.write(AppExit::Success);
                     }
                     _ => {}

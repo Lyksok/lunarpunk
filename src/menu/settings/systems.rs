@@ -102,7 +102,9 @@ pub fn button_interaction(
                 match menu_button_action {
                     MenuButtonAction::Back => {
                         // Handle back button action
+                        #[cfg(debug_assertions)]
                         println!("Back button pressed");
+                        
                         menu_state.set(MenuState::Main);
                     }
                 }
