@@ -1,6 +1,7 @@
 use bevy::prelude::*;
 use bevy::window::WindowResolution;
 use bevy::winit::WinitSettings;
+use lunarpunk::components::GameState;
 
 fn main() {
     App::new()
@@ -13,6 +14,8 @@ fn main() {
             ..default()
         }))
         .insert_resource(WinitSettings::game())
-        .add_plugins(lunarpunk::menu::MenuPlugin)
+        .init_state::<GameState>()
+        .add_plugins((lunarpunk::menu::MenuPlugin, 
+                     lunarpunk::game::GamePlugin))
         .run();
 }

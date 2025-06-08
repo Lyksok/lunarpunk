@@ -2,6 +2,7 @@ use super::components::*;
 use crate::menu::components::MenuState;
 use bevy::app::AppExit;
 use bevy::prelude::*;
+use crate::components::GameState;
 use crate::menu::systems::*;
 
 pub fn setup(mut commands: Commands) {
@@ -60,6 +61,7 @@ pub fn button_interaction(
     >,
     mut app_exit_events: EventWriter<AppExit>,
     mut menu_state: ResMut<NextState<MenuState>>,
+    mut game_state: ResMut<NextState<GameState>>,
     input: Res<ButtonInput<MouseButton>>,
 ) {
     for (interaction, menu_button_action) in interaction_query.iter_mut() {
@@ -71,6 +73,9 @@ pub fn button_interaction(
                         // Handle play button action
                         #[cfg(debug_assertions)]
                         println!("Play button pressed");
+                        
+                        menu_state.set(MenuState::Disabled);
+                        game_state.set(GameState::Game);
                     }
                     MenuButtonAction::Settings if input.just_pressed(MouseButton::Left) => {
                         // Handle settings button action

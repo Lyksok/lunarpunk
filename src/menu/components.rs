@@ -6,4 +6,5 @@ pub enum MenuState {
     Main,
     Settings,
     Credits,
+    Disabled,
 }

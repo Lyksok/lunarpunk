@@ -1,10 +1,11 @@
-use bevy::prelude::*;
+mod simple_3d;
 
-use bevy::winit::WinitSettings;
+use bevy::prelude::*;
 
 pub struct GamePlugin;
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
-        app.insert_resource(WinitSettings::game());
+        app
+            .add_plugins(simple_3d::Simple3DPlugin);
     }
 }
