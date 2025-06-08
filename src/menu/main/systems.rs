@@ -1,3 +1,4 @@
+use super::components::*;
 use bevy::prelude::*;
 
 fn button(text: &str) -> impl Bundle + use<> {
@@ -41,14 +42,6 @@ fn text(text: &str) -> impl Bundle + use<> {
     )
 }
 
-#[derive(Component, Debug)]
-pub enum MenuButtonAction {
-    Play,
-    Settings,
-    Credits,
-    Quit,
-}
-
 pub fn setup(mut commands: Commands) {
     commands
         .spawn((
@@ -88,11 +81,53 @@ pub fn setup(mut commands: Commands) {
                     ..default()
                 },
                 children![
-                    (button("Play"),MenuButtonAction::Play),
+                    (button("Play"), MenuButtonAction::Play),
                     (button("Settings"), MenuButtonAction::Settings),
                     (button("Credits"), MenuButtonAction::Credits),
                     (button("Quit"), MenuButtonAction::Quit),
                 ],
             ));
         });
+}
+
+pub fn button_interaction(
+    mut interaction_query: Query<
+        (&Interaction, &MenuButtonAction),
+        (Changed<Interaction>, With<Button>),
+    >,
+) {
+    for (interaction, menu_button_action) in interaction_query.iter_mut() {
+        match *interaction {
+            Interaction::Pressed => {
+                // Handle button press
+                match menu_button_action {
+                    MenuButtonAction::Play => {
+                        // Handle play button action
+                        println!("Play button pressed");
+                    }
+                    MenuButtonAction::Settings => {
+                        // Handle settings button action
+                        println!("Settings button pressed");
+                    }
+                    MenuButtonAction::Credits => {
+                        // Handle credits button action
+                        println!("Credits button pressed");
+                    }
+                    MenuButtonAction::Quit => {
+                        // Handle quit button action
+                        println!("Quit button pressed");
+                        std::process::exit(0);
+                    }
+                }
+            }
+            Interaction::Hovered => {
+                // Handle button hover
+                // println!("Button hovered: {:?}", menu_button_action);
+            }
+            Interaction::None => {
+                // Handle button release or no interaction
+                // println!("Button released: {:?}", menu_button_action);
+            }
+        }
+    }
 }
