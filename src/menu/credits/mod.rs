@@ -2,7 +2,6 @@ mod components;
 mod systems;
 
 use super::components::*;
-use crate::menu::credits::components::OnCreditsMenu;
 use crate::utils::despawn_screen;
 use bevy::prelude::*;
 
@@ -15,7 +14,7 @@ impl Plugin for CreditsMenuPlugin {
                 Update,
                 systems::button_interaction
                     .run_if(in_state(MenuState::Credits))
-                    .after(despawn_screen::<OnCreditsMenu>),
+                    .after(despawn_screen::<components::OnCreditsMenu>),
             )
             .add_systems(
                 OnExit(MenuState::Credits),

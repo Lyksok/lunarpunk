@@ -1,5 +1,5 @@
-pub mod components;
-pub mod systems;
+mod components;
+mod systems;
 
 use super::components::*;
 use crate::utils::despawn_screen;
