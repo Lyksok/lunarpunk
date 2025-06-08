@@ -1,14 +1,17 @@
-mod simple_3d;
-mod movement;
-mod map;
 mod camera;
+mod components;
+mod map;
+mod movement;
 
 use bevy::prelude::*;
 
 pub struct GamePlugin;
 impl Plugin for GamePlugin {
     fn build(&self, app: &mut App) {
-        app
-            .add_plugins(simple_3d::Simple3DPlugin);
+        app.add_plugins((
+            map::MapPlugin,
+            camera::CameraPlugin,
+            movement::MovementPlugin,
+        ));
     }
 }

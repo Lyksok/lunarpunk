@@ -15,7 +15,6 @@ fn main() {
         }))
         .insert_resource(WinitSettings::game())
         .init_state::<GameState>()
-        .add_plugins((lunarpunk::menu::MenuPlugin, 
-                     lunarpunk::game::GamePlugin))
+        .add_plugins((lunarpunk::menu::MenuPlugin, lunarpunk::game::GamePlugin))
         .run();
 }
