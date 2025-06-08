@@ -59,6 +59,7 @@ pub fn setup(mut commands: Commands) {
                 },
                 ..default()
             },
+            OnSettingsMenu,
             BackgroundColor(Color::srgb_u8(42, 42, 42)),
         ))
         .with_children(|builder| {

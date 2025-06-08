@@ -60,6 +60,7 @@ pub fn setup(mut commands: Commands) {
                 },
                 ..default()
             },
+            OnMainMenu,
             BackgroundColor(Color::srgb_u8(42, 42, 42)),
         ))
         .with_children(|builder| {
@@ -108,21 +109,21 @@ pub fn button_interaction(
                 match menu_button_action {
                     MenuButtonAction::Play if input.just_pressed(MouseButton::Left) => {
                         // Handle play button action
-                        println!("Play button pressed");
+                        //println!("Play button pressed");
                     }
                     MenuButtonAction::Settings if input.just_pressed(MouseButton::Left) => {
                         // Handle settings button action
-                        println!("Settings button pressed");
+                        //println!("Settings button pressed");
                         menu_state.set(MenuState::Settings);
                     }
                     MenuButtonAction::Credits if input.just_pressed(MouseButton::Left) => {
                         // Handle credits button action
-                        println!("Credits button pressed");
+                        //println!("Credits button pressed");
                         menu_state.set(MenuState::Credits);
                     }
                     MenuButtonAction::Quit if input.just_pressed(MouseButton::Left) => {
                         // Handle quit button action
-                        println!("Quit button pressed");
+                        //println!("Quit button pressed");
                         app_exit_events.write(AppExit::Success);
                     }
                     _ => {}
