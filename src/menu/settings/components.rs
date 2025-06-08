@@ -2,11 +2,8 @@ use bevy::prelude::Component;
 
 #[derive(Component, Debug)]
 pub enum MenuButtonAction {
-    Play,
-    Settings,
-    Credits,
-    Quit,
+    Back,
 }
 
 #[derive(Component)]
-pub struct OnMainMenu;
+pub struct OnSettingsMenu;

@@ -12,7 +12,7 @@ fn main() {
             }),
             ..default()
         }))
-        .insert_resource(WinitSettings::desktop_app())
+        .insert_resource(WinitSettings::game())
         .add_plugins(lunarpunk::menu::MenuPlugin)
         .run();
 }

@@ -1,15 +1,21 @@
-use crate::menu::camera::CameraPlugin;
-use crate::menu::main::LayoutPlugin;
 use bevy::prelude::*;
+use crate::menu::components::MenuState;
 
-pub mod camera;
+mod camera;
 mod components;
-pub mod main;
+mod main;
+mod settings;
+mod systems;
 
 pub struct MenuPlugin;
 
 impl Plugin for MenuPlugin {
     fn build(&self, app: &mut App) {
-        app.add_plugins((LayoutPlugin, CameraPlugin));
+        app.init_state::<MenuState>()
+            .add_plugins((
+            camera::CameraPlugin,
+            main::MainMenuPlugin,
+            settings::SettingsMenuPlugin,
+        ));
     }
 }

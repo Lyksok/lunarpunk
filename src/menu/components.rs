@@ -1,10 +1,8 @@
 use bevy::prelude::*;
 
-#[derive(Component, Deref)]
-pub struct MenuState(Menu);
-
-#[derive(Component, Debug)]
-pub enum Menu {
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, Default, States)]
+pub enum MenuState {
+    #[default]
     Main,
     Settings,
     Credits,
