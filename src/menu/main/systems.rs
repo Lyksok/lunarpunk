@@ -73,7 +73,7 @@ pub fn button_interaction(
                         // Handle play button action
                         #[cfg(debug_assertions)]
                         println!("Play button pressed");
-                        
+
                         menu_state.set(MenuState::Disabled);
                         game_state.set(GameState::Game);
                     }

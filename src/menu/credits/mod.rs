@@ -12,8 +12,7 @@ impl Plugin for CreditsMenuPlugin {
         app.add_systems(OnEnter(MenuState::Credits), systems::setup)
             .add_systems(
                 Update,
-                systems::button_interaction
-                    .run_if(in_state(MenuState::Credits)),
+                systems::button_interaction.run_if(in_state(MenuState::Credits)),
             )
             .add_systems(
                 OnExit(MenuState::Credits),

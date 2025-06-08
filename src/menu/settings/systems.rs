@@ -1,7 +1,7 @@
 use super::components::*;
 use crate::menu::components::MenuState;
-use bevy::prelude::*;
 use crate::menu::systems::*;
+use bevy::prelude::*;
 
 pub fn setup(mut commands: Commands) {
     commands
@@ -64,7 +64,7 @@ pub fn button_interaction(
                         // Handle back button action
                         #[cfg(debug_assertions)]
                         println!("Back button pressed");
-                        
+
                         menu_state.set(MenuState::Main);
                     }
                 }
