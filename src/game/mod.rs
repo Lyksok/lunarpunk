@@ -1,4 +1,7 @@
 mod simple_3d;
+mod movement;
+mod map;
+mod camera;
 
 use bevy::prelude::*;
 
