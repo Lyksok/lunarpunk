@@ -1,6 +1,9 @@
+use crate::game::simple_3d::components::Player;
+use bevy::input::mouse::MouseMotion;
 use bevy::prelude::*;
+use bevy::window::Window;
 
-pub fn setup(mut commands: Commands,mut meshes: ResMut<Assets<Mesh>>,
+pub fn setup(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>,
              mut materials: ResMut<Assets<StandardMaterial>>,) {
     commands.spawn((
         Mesh3d(meshes.add(Circle::new(4.0))),
@@ -24,6 +27,7 @@ pub fn setup(mut commands: Commands,mut meshes: ResMut<Assets<Mesh>>,
     // camera
     commands.spawn((
         Camera3d::default(),
+        Player,
         Transform::from_xyz(-2.5, 4.5, 9.0).looking_at(Vec3::ZERO, Vec3::Y),
     ));
 }
@@ -48,7 +52,21 @@ pub fn move_camera(
         if keyboard_input.pressed(KeyCode::KeyD) {
             direction += Vec3::X;
         }
-        
+
         transform.translation += direction.normalize_or_zero() * 5.0 * time.delta_secs();
+    }
+}
+
+pub fn move_mouse(
+    mut mouse_motion_events: EventReader<MouseMotion>,
+    mut query: Query<&mut Transform, With<Camera3d>>,
+) {
+    if let Ok(mut transform) = query.single_mut() {
+        for event in mouse_motion_events.read() {
+            // Rotate the camera based on mouse movement
+            transform.rotate(Quat::from_rotation_y(-event.delta.x * 0.002));
+            transform.rotate(Quat::from_rotation_x(-event.delta.y * 0.002));
+            transform.rotation.z = 0.0; // Prevent roll
+        }
     }
 }

@@ -13,7 +13,7 @@ impl Plugin for Simple3DPlugin {
         app.add_systems(
             Update,
             (
-                systems::move_camera.run_if(in_state(GameState::Game)),
+                (systems::move_camera, systems::move_mouse).run_if(in_state(GameState::Game)),
             )
         );
     }
