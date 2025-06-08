@@ -13,8 +13,7 @@ impl Plugin for CreditsMenuPlugin {
             .add_systems(
                 Update,
                 systems::button_interaction
-                    .run_if(in_state(MenuState::Credits))
-                    .after(despawn_screen::<components::OnCreditsMenu>),
+                    .run_if(in_state(MenuState::Credits)),
             )
             .add_systems(
                 OnExit(MenuState::Credits),
