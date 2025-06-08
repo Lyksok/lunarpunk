@@ -138,11 +138,9 @@ pub fn button_interaction(
             }
             Interaction::Hovered => {
                 // Handle button hover
-                // println!("Button hovered: {:?}", menu_button_action);
             }
             Interaction::None => {
                 // Handle button release or no interaction
-                // println!("Button released: {:?}", menu_button_action);
             }
         }
     }
