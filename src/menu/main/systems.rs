@@ -1,4 +1,6 @@
 use super::components::*;
+use crate::menu::components::MenuState;
+use bevy::app::AppExit;
 use bevy::prelude::*;
 
 fn button(text: &str) -> impl Bundle + use<> {
@@ -95,29 +97,34 @@ pub fn button_interaction(
         (&Interaction, &MenuButtonAction),
         (Changed<Interaction>, With<Button>),
     >,
+    mut app_exit_events: EventWriter<AppExit>,
+    mut menu_state: ResMut<NextState<MenuState>>,
+    input: Res<ButtonInput<MouseButton>>,
 ) {
     for (interaction, menu_button_action) in interaction_query.iter_mut() {
         match *interaction {
             Interaction::Pressed => {
                 // Handle button press
                 match menu_button_action {
-                    MenuButtonAction::Play => {
+                    MenuButtonAction::Play if input.just_pressed(MouseButton::Left) => {
                         // Handle play button action
                         println!("Play button pressed");
                     }
-                    MenuButtonAction::Settings => {
+                    MenuButtonAction::Settings if input.just_pressed(MouseButton::Left) => {
                         // Handle settings button action
                         println!("Settings button pressed");
+                        menu_state.set(MenuState::Settings);
                     }
-                    MenuButtonAction::Credits => {
+                    MenuButtonAction::Credits if input.just_pressed(MouseButton::Left) => {
                         // Handle credits button action
                         println!("Credits button pressed");
                     }
-                    MenuButtonAction::Quit => {
+                    MenuButtonAction::Quit if input.just_pressed(MouseButton::Left) => {
                         // Handle quit button action
                         println!("Quit button pressed");
-                        std::process::exit(0);
+                        app_exit_events.write(AppExit::Success);
                     }
+                    _ => {}
                 }
             }
             Interaction::Hovered => {

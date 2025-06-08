@@ -9,9 +9,11 @@ pub struct MainMenuPlugin;
 
 impl Plugin for MainMenuPlugin {
     fn build(&self, app: &mut App) {
-        app
-            .add_systems(OnEnter(MenuState::Main), systems::setup)
-            .add_systems(Update, systems::button_interaction)
+        app.add_systems(OnEnter(MenuState::Main), systems::setup)
+            .add_systems(
+                Update,
+                systems::button_interaction.run_if(in_state(MenuState::Main)),
+            )
             .add_systems(
                 OnExit(MenuState::Main),
                 despawn_screen::<components::OnMainMenu>,

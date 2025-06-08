@@ -1,4 +1,5 @@
 use super::components::*;
+use crate::menu::components::MenuState;
 use bevy::prelude::*;
 
 fn button(text: &str) -> impl Bundle + use<> {
@@ -69,7 +70,7 @@ pub fn setup(mut commands: Commands) {
                     width: Val::Percent(50.0),
                     ..default()
                 })
-                .with_child(text("Lunarpunk"));
+                .with_child(text("Settings"));
             // ############# Quit button #############
             builder.spawn((
                 Node {
@@ -90,15 +91,18 @@ pub fn button_interaction(
         (&Interaction, &MenuButtonAction),
         (Changed<Interaction>, With<Button>),
     >,
+    input: Res<ButtonInput<MouseButton>>,
+    mut menu_state: ResMut<NextState<MenuState>>,
 ) {
     for (interaction, menu_button_action) in interaction_query.iter_mut() {
         match *interaction {
-            Interaction::Pressed => {
+            Interaction::Pressed if input.just_pressed(MouseButton::Left) => {
                 // Handle button press
                 match menu_button_action {
                     MenuButtonAction::Back => {
                         // Handle back button action
                         println!("Back button pressed");
+                        menu_state.set(MenuState::Main);
                     }
                 }
             }
@@ -110,6 +114,7 @@ pub fn button_interaction(
                 // Handle button release or no interaction
                 // println!("Button released: {:?}", menu_button_action);
             }
+            _ => {}
         }
     }
 }
