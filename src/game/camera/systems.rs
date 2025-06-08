@@ -5,6 +5,9 @@ use bevy::prelude::*;
 use bevy::window::{CursorGrabMode, PrimaryWindow, WindowFocused};
 use std::f32::consts::PI;
 
+const CAMERA_SENSITIVITY: f32 = 5.0;
+const CAMERA_SPEED: f32 = 20.0;
+
 pub fn setup(mut commands: Commands) {
     commands.spawn((
         Camera3d::default(),
@@ -21,8 +24,7 @@ pub fn rotate_camera(
     if !window.focused {
         return;
     }
-    let base_sensitivity = 5.0;
-    let sensitivity = base_sensitivity / window.width().min(window.height());
+    let sensitivity = CAMERA_SENSITIVITY / window.width().min(window.height());
 
     let (mut yaw, mut pitch, _) = player.rotation.to_euler(EulerRot::YXZ);
     pitch -= mouse_motion.delta.y * sensitivity;
@@ -56,7 +58,7 @@ pub fn move_player(
     let right = player.right().as_vec3() * delta.x;
     let to_move = (forward + right).normalize_or_zero();
 
-    player.translation += to_move * time.delta_secs() * 30.0;
+    player.translation += to_move * time.delta_secs() * CAMERA_SPEED;
 }
 
 pub fn apply_grab(
