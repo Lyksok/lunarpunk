@@ -1,6 +1,5 @@
 use super::components::*;
 use crate::menu::components::MenuState;
-use bevy::app::AppExit;
 use bevy::prelude::*;
 
 fn button(text: &str) -> impl Bundle + use<> {
@@ -71,7 +70,7 @@ pub fn setup(mut commands: Commands) {
                     width: Val::Percent(50.0),
                     ..default()
                 })
-                .with_child(text("Lunarpunk"));
+                .with_child(text("Credits"));
             // ############# Quit button #############
             builder.spawn((
                 Node {
@@ -82,12 +81,7 @@ pub fn setup(mut commands: Commands) {
                     width: Val::Percent(50.0),
                     ..default()
                 },
-                children![
-                    (button("Play"), MenuButtonAction::Play),
-                    (button("Settings"), MenuButtonAction::Settings),
-                    (button("Credits"), MenuButtonAction::Credits),
-                    (button("Quit"), MenuButtonAction::Quit),
-                ],
+                children![(button("Back"), MenuButtonAction::Back),],
             ));
         });
 }
@@ -97,35 +91,19 @@ pub fn button_interaction(
         (&Interaction, &MenuButtonAction),
         (Changed<Interaction>, With<Button>),
     >,
-    mut app_exit_events: EventWriter<AppExit>,
-    mut menu_state: ResMut<NextState<MenuState>>,
     input: Res<ButtonInput<MouseButton>>,
+    mut menu_state: ResMut<NextState<MenuState>>,
 ) {
     for (interaction, menu_button_action) in interaction_query.iter_mut() {
         match *interaction {
-            Interaction::Pressed => {
+            Interaction::Pressed if input.just_pressed(MouseButton::Left) => {
                 // Handle button press
                 match menu_button_action {
-                    MenuButtonAction::Play if input.just_pressed(MouseButton::Left) => {
-                        // Handle play button action
-                        println!("Play button pressed");
+                    MenuButtonAction::Back => {
+                        // Handle back button action
+                        println!("Back button pressed");
+                        menu_state.set(MenuState::Main);
                     }
-                    MenuButtonAction::Settings if input.just_pressed(MouseButton::Left) => {
-                        // Handle settings button action
-                        println!("Settings button pressed");
-                        menu_state.set(MenuState::Settings);
-                    }
-                    MenuButtonAction::Credits if input.just_pressed(MouseButton::Left) => {
-                        // Handle credits button action
-                        println!("Credits button pressed");
-                        menu_state.set(MenuState::Credits);
-                    }
-                    MenuButtonAction::Quit if input.just_pressed(MouseButton::Left) => {
-                        // Handle quit button action
-                        println!("Quit button pressed");
-                        app_exit_events.write(AppExit::Success);
-                    }
-                    _ => {}
                 }
             }
             Interaction::Hovered => {
@@ -136,6 +114,7 @@ pub fn button_interaction(
                 // Handle button release or no interaction
                 // println!("Button released: {:?}", menu_button_action);
             }
+            _ => {}
         }
     }
 }

@@ -5,6 +5,7 @@ mod camera;
 mod components;
 mod main;
 mod settings;
+mod credits;
 mod systems;
 
 pub struct MenuPlugin;
@@ -15,6 +16,7 @@ impl Plugin for MenuPlugin {
             camera::CameraPlugin,
             main::MainMenuPlugin,
             settings::SettingsMenuPlugin,
+            credits::CreditsMenuPlugin,
         ));
     }
 }
