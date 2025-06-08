@@ -3,9 +3,9 @@ use bevy::prelude::*;
 
 mod camera;
 mod components;
+mod credits;
 mod main;
 mod settings;
-mod credits;
 mod systems;
 
 pub struct MenuPlugin;
