@@ -1,9 +1,9 @@
 use super::components::*;
+use crate::components::GameState;
 use crate::menu::components::MenuState;
+use crate::menu::systems::*;
 use bevy::app::AppExit;
 use bevy::prelude::*;
-use crate::components::GameState;
-use crate::menu::systems::*;
 
 pub fn setup(mut commands: Commands) {
     commands
