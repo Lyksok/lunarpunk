@@ -56,7 +56,8 @@ pub fn move_player(
 
     let forward = player.forward().as_vec3() * delta.z;
     let right = player.right().as_vec3() * delta.x;
-    let to_move = (forward + right).normalize_or_zero();
+    let mut to_move = (forward + right).normalize_or_zero();
+    to_move.y = 0.0; // Prevent vertical movement
 
     player.translation += to_move * time.delta_secs() * CAMERA_SPEED;
 }
